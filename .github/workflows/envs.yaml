@@ -1,0 +1,27 @@
+name: ENV Variables
+on: push
+env:
+  WF_ENV: Aviable to all jobs
+
+jobs:
+  log-env:
+    runs-on: ubuntu-latest
+    env:
+      JOB_ENV: Aviable to all steps in log-env
+    steps:
+      - name: Log ENV Variables
+        env:
+          LOG_ENV: Aviable to only this step
+          STEP_ENV: Aviable to only this step
+        run: |
+        echo "WF_ENV: ${WF_ENV}"
+        echo "JOB_ENV: ${JOB_ENV}"
+        echo "LOG_ENV: ${LOG_ENV}"
+
+
+  log_default_env:
+    runs_on: ubuntu-latest
+    steps:
+      - name: Default ENV Variables
+        run: |
+          echo "HOME: ${HOME}"
