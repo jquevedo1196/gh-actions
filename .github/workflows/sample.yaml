@@ -1,14 +1,30 @@
-name: Shell Commands
+name: Shell Commands 
 
 on: [push, pull_request]
 
 jobs:
   run-shell-command:
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - name: echo a string
-        run: echo "testeando un github action"
-      - name: multiline script
+        run: echo "Hello World"
+      - name: multiline script 
         run: |
-          node -v
-          npm -v
+           node -v 
+           npm -v
+      - name: python Command 
+        run: |
+          import platform 
+          print
+          (platform.processor())
+        shell: python
+  run-windwos-commands:
+    runs-on: windows-latest
+    #Aplica unicamente si depende del proceso anterior
+    needs: ["run-shell-command"]
+    steps:
+      - name: Directory PowerShell
+        run: Get-Location 
+      - name: Directory Bash 
+        run: pwd 
+        shell: bash 
